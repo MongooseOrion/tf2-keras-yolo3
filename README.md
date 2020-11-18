@@ -1,5 +1,17 @@
 # tf2-keras-yolo3
 
+
+行吧行吧，我知道这个项目真的很不好用~
+
+那么，来看看 [xyolo](https://github.com/AaronJny/xyolo) 吧！
+
+[xyolo](https://github.com/AaronJny/xyolo) 是对 tf2-keras-yolo3的重构和封装，旨在降低使用门槛，帮助实现快速开发。
+
+几行Python代码即可训练自己的目标检测模型或者调用模型进行检测哦~你不试试吗？
+
+----------
+
+
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE)
 
 这是对[qqwweee/keras-yolo3](https://github.com/qqwweee/keras-yolo3)的fork和修改，目的是使它支持TensorFlow 2.2。
