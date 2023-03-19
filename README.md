@@ -1,154 +1,35 @@
-# tf2-keras-yolo3
+# �� Tensorflow2 ��ʹ�� yolov3 ����Ŀ����
 
+����Ŀ�� [AaronJny/tf2-keras-yolo3](https://github.com/AaronJny/tf2-keras-yolo3) �ķ�֧�����[�˴�](./README_old.md)�鿴ԭ��Ŀ�������ļ������ڿ�������������ͬ���������Ҫ�޸�ĳЩ�������������д��롣
 
-行吧行吧，我知道这个项目真的很不好用~
+### ��������
 
-那么，来看看 [xyolo](https://github.com/AaronJny/xyolo) 吧！
+ע�⣺ʹ�� `pip show [ģ����]` ָ����Բ鿴ģ��İ汾�����Ƿ���ڣ�ʹ�� `pip list` ָ����Բ鿴��װ������ Python ģ�顣
 
-[xyolo](https://github.com/AaronJny/xyolo) 是对 tf2-keras-yolo3的重构和封装，旨在降低使用门槛，帮助实现快速开发。
+  * TensorFlow �汾��TensorFlow-GPU 2.6
+  * keras �汾��2.11
+  * protobuf �汾��4.22.1
 
-几行Python代码即可训练自己的目标检测模型或者调用模型进行检测哦~你不试试吗？
+## ������
 
-----------
+�ڿ�¡�ֿ����Ҫ������Ԥѵ��Ȩ���ļ� `yolov3.weights`����
 
-
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE)
-
-这是对[qqwweee/keras-yolo3](https://github.com/qqwweee/keras-yolo3)的fork和修改，目的是使它支持TensorFlow 2.2。
-
-主要修改内容如下：
-
-- 以tf.keras为主导，替换掉独立的keras库
-- 修改部分基于TensorFlow 1.x版本的接口和逻辑，使项目支持TensorFlow 2.2
-- 修改原项目命令行参数错误
-
-2020.6.29 更新：
-
-- 在TensorFlow 2.2下测试兼容性，运行正常
-- 之前有朋友反映无法通过`train.py`完成自定义数据集的训练，我在TensorFlow 2.2下做了测试，一切正常
-- 使用`tf.function`优化模型性能
-
-关于训练：
-
-> 亲测TensorFlow 2.2下训练自定义数据集是没有问题的，训练不成功的同学请尝试如下方法：
->
-> 1. 升级TensorFlow版本为2.2
-> 2. 仔细阅读原`README.MD`中关于`train.py`部分的表述，在训练前需要先准备数据集、处理数据格式以及按实际情况修改`train.py`中的参数。如果没有做这些工作的话，出现错误很正常。
-
-TODO:
-
-- [ ] 编写一个使用`tf2-keras-yolo3`训练自己的数据集的详细教程。
-- [x] 提取各脚本中常用配置参数到统一文件
-
-更多信息请访问 [深度学习下的目标检测算法——TensorFlow 2.0下的YOLOv3实践](https://blog.csdn.net/aaronjny/article/details/103658254) (https://blog.csdn.net/aaronjny/article/details/103658254)
-
-下附[qqwweee/keras-yolo3](https://github.com/qqwweee/keras-yolo3)的README.
-
-
-This is a fork and modification of [qqwweee / keras-yolo3](https://github.com/qqwweee/keras-yolo3), in order to make it support TensorFlow 2.2.
-
-Attached is the README of [qqwweee / keras-yolo3](https://github.com/qqwweee/keras-yolo3).
-
-
-
-------------------------
-
-# keras-yolo3
-
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE)
-
-## Introduction
-
-A Keras implementation of YOLOv3 (Tensorflow backend) inspired by [allanzelener/YAD2K](https://github.com/allanzelener/YAD2K).
-
-
----
-
-## Quick Start
-
-1. Download YOLOv3 weights from [YOLO website](http://pjreddie.com/darknet/yolo/).
-2. Convert the Darknet YOLO model to a Keras model.
-3. Run YOLO detection.
-
+���д��룺
 ```
-wget https://pjreddie.com/media/files/yolov3.weights
 python convert.py yolov3.cfg yolov3.weights model_data/yolo.h5
-python yolo_video.py [OPTIONS...] --image, for image detection mode, OR
-python yolo_video.py [video_path] [output_path (optional)]
 ```
 
-For Tiny YOLOv3, just do in a similar way, just specify model path and anchor path with `--model model_file` and `--anchors anchor_file`.
-
-### Usage
-Use --help to see usage of yolo_video.py:
+���� `protobuf=4.22.1` �汾���ߣ���ʾ��
 ```
-usage: yolo_video.py [-h] [--model MODEL] [--anchors ANCHORS]
-                     [--classes CLASSES] [--gpu_num GPU_NUM] [--image]
-                     [--input] [--output]
-
-positional arguments:
-  --input        Video input path
-  --output       Video output path
-
-optional arguments:
-  -h, --help         show this help message and exit
-  --model MODEL      path to model weight file, default model_data/yolo.h5
-  --anchors ANCHORS  path to anchor definitions, default
-                     model_data/yolo_anchors.txt
-  --classes CLASSES  path to class definitions, default
-                     model_data/coco_classes.txt
-  --gpu_num GPU_NUM  Number of GPU to use, default 1
-  --image            Image detection mode, will ignore all positional arguments
+TypeError: Descriptors cannot not be created directly.
+If this call came from a _pb2.py file, your generated code is out of date and must be regenerated with protoc >= 3.19.0.
 ```
----
 
-4. MultiGPU usage: use `--gpu_num N` to use N GPUs. It is passed to the [Keras multi_gpu_model()](https://keras.io/utils/#multi_gpu_model).
+��ˣ�������ʾ������ `3.19.6` �汾��������Ϊ��
+```
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+tensorboard 2.12.0 requires protobuf>=3.19.6, but you have protobuf 3.19.0 which is incompatible.
+```
 
-## Training
+<br>Ϊ���ݸòֿ⣬`keras` �汾�밲װΪ `2.6`��
 
-1. Generate your own annotation file and class names file.  
-    One row for one image;  
-    Row format: `image_file_path box1 box2 ... boxN`;  
-    Box format: `x_min,y_min,x_max,y_max,class_id` (no space).  
-    For VOC dataset, try `python voc_annotation.py`  
-    Here is an example:
-    ```
-    path/to/img1.jpg 50,100,150,200,0 30,50,200,120,3
-    path/to/img2.jpg 120,300,250,600,2
-    ...
-    ```
-
-2. Make sure you have run `python convert.py -w yolov3.cfg yolov3.weights model_data/yolo_weights.h5`  
-    The file model_data/yolo_weights.h5 is used to load pretrained weights.
-
-3. Modify train.py and start training.  
-    `python train.py`  
-    Use your trained weights or checkpoint weights with command line option `--model model_file` when using yolo_video.py
-    Remember to modify class path or anchor path, with `--classes class_file` and `--anchors anchor_file`.
-
-If you want to use original pretrained weights for YOLOv3:  
-    1. `wget https://pjreddie.com/media/files/darknet53.conv.74`  
-    2. rename it as darknet53.weights  
-    3. `python convert.py -w darknet53.cfg darknet53.weights model_data/darknet53_weights.h5`  
-    4. use model_data/darknet53_weights.h5 in train.py
-
----
-
-## Some issues to know
-
-1. The test environment is
-    - Python 3.5.2
-    - Keras 2.1.5
-    - tensorflow 1.6.0
-
-2. Default anchors are used. If you use your own anchors, probably some changes are needed.
-
-3. The inference result is not totally the same as Darknet but the difference is small.
-
-4. The speed is slower than Darknet. Replacing PIL with opencv may help a little.
-
-5. Always load pretrained weights and freeze layers in the first stage of training. Or try Darknet training. It's OK if there is a mismatch warning.
-
-6. The training strategy is for reference only. Adjust it according to your dataset and your goal. And add further strategy if needed.
-
-7. For speeding up the training process with frozen layers train_bottleneck.py can be used. It will compute the bottleneck features of the frozen model first and then only trains the last layers. This makes training on CPU possible in a reasonable time. See [this](https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html) for more information on bottleneck features.
