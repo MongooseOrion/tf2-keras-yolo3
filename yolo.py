@@ -12,7 +12,12 @@ import tensorflow as tf
 from PIL import Image, ImageFont, ImageDraw
 from tensorflow.keras.layers import Input
 from tensorflow.keras.models import load_model
-from tensorflow.keras.utils import multi_gpu_model
+#from tensorflow.keras.utils import multi_gpu_model
+from tensorflow.python.keras.utils.multi_gpu_utils import multi_gpu_model
+#from keras.utils.multi_gpu_utils import multi_gpu_model
+#from keras.utils import multi_gpu_model
+#from tensorflow.keras.utils.multi_gpu_utils import multi_gpu_model
+
 
 import settings
 from yolo3.model import yolo_eval, yolo_body, tiny_yolo_body
