@@ -108,3 +108,5 @@ ENV/
 .mypy_cache/
 
 *.mp4
+*.jpg
+*.jpeg
