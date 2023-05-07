@@ -8,7 +8,7 @@
 
   * TensorFlow 版本：TensorFlow-GPU 2.7
   * keras 版本：2.7
-  * protobuf 版本：4.22.1
+  * protobuf 版本：3.19.6
 
 ## 运行预训练权重文件
 
