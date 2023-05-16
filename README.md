@@ -62,9 +62,13 @@ optional arguments:
 
 用于训练的注释文件 `train.txt` 的格式如下：
 ```
-path/to/img1.jpg 50,100,150,200,0 30,50,200,120,3
-path/to/img2.jpg 120,300,250,600,2
+path/to/img1.jpg bbox1 bbox2 ... bboxN
+path/to/img2.jpg bbox1 
 ...
+```
+其中，`bbox1`、`bbox2` 的格式为：
+```
+x_min,y_min,x_max,y_max,class_id    // class_id 从 0 开始
 ```
 
 对于 VOC 数据集，尝试 `python voc_annotation.py`。
