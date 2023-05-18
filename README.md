@@ -73,9 +73,7 @@ x_min,y_min,x_max,y_max,class_id    // class_id 从 0 开始
 
 对于 VOC 数据集，尝试 `python voc_annotation.py`。
 
-使用 `train.py` 进行训练后，可在使用 `yolo_video.py` 时使用 `--model modelfile` 来使用自定义训练的权重或检查点权重文件。
-
-使用 `--classes class_file` 和 `--anchors anchor_file` 以修改类和 anchor 文件路径。
+使用 `train.py` 进行训练时，可利用指令 `--model modelfile` 来指定自定义训练的权重或检查点权重文件。同时，还可利用指令 `--classes class_file` 和 `--anchors anchor_file` 以修改类和 anchor 文件路径。
 
 <br>同时，如果你想使用 YOLOv3 原始预训练权重，可以这样做：
   1. 下载 `darknet53.conv.74` ，可以使用命令 `wget https://pjreddie.com/media/files/darknet53.conv.74`。

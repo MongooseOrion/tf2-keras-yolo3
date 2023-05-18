@@ -110,3 +110,6 @@ ENV/
 *.mp4
 *.jpg
 *.jpeg
+
+/train.txt
+/categary.txt
