@@ -70,13 +70,52 @@ path/to/img2.jpg bbox1
 ```
 x_min,y_min,x_max,y_max,class_id    // class_id 从 0 开始
 ```
+### 制作自己的数据集
 
-对于 VOC 数据集，尝试 `python voc_annotation.py`。
+你只需要保证格式与上述的格式一致即可，这可能需要使用自己编写 python 代码，位于存储库 [deep_learn 的名为 process.py 的代码]()或许能给你一些帮助。
 
-使用 `train.py` 进行训练时，可利用指令 `--model modelfile` 来指定自定义训练的权重或检查点权重文件。同时，还可利用指令 `--classes class_file` 和 `--anchors anchor_file` 以修改类和 anchor 文件路径。
+### 处理 COCO 数据集
+
+对于 COCO 数据集，你可以使用 `python coco_annotation.py`。
+
+### 处理 VOC 数据集
+
+对于 VOC 数据集，你可以使用 `python voc_annotation.py`。
+
+### 开始训练
+
+首先，你需要使用 `kmeans.py` 计算用于训练的图片的 anchors 数值。需要生成的数字数量，也即变量 `cluster_number` 与训练的图片有几种分辨率有关系。生成后，按照 `anchors.txt` 原本的格式将数值替换。*这一步骤不是必要的，除非你对模型性能有非常高的需求*。
+
+然后，你需要运行命令：
+```
+// 创建 yolov3 权重文件
+python convert.py -w yolov3.cfg yolov3.weights model_data/yolo_weights.h5
+
+// 创建 tiny yolov3 权重文件
+python convert.py -w yolov3-tiny.cfg yolov3-tiny.weights model_data/tiny_yolo_weights.h5
+```
+
+其中，`.cfg` 文件，你需要把变量名 `anchors`、`classes`、`num` 修改为自定义的数值（如果你没有修改 `anchors.txt` 文件，则只需修改 `classes`），同时还需要修改 `filters` 的数值，如何修改请自行搜索。
+
+训练时你需要保证 `settings.py` 的设置如你所想，以下是你需要注意的配置信息：
+
+```
+DEFAULT_MODEL_PATH              // 该变量规定了在执行识别时使用的模型文件
+DEFAULT_ANCHORS_PATH            // 该变量规定了在执行训练和识别时使用的 anchors 文件，你需要确保文件中的 box 数量与 cfg 文件中设置的一致。同时，如果值为 `tiny_yolo_anchors.txt`，则将转换为 tiny yolo 模型训练
+DEFAULT_CLASSES_PATH            // 该变量规定了训练种类的存储文件
+PRE_TRAINING_TINY_YOLO_WEIGHTS  
+PRE_TRAINING_YOLO_WEIGHTS       // 这两个变量不仅规定了训练时使用的预训练权重文件，也可以指定训练中断时从上一个保存的模型文件开始训练
+UNFREEZE_TRAIN_BATCH_SIZE       // 如果是 yolo 模型，建议为 1；如果是 tiny yolo 模型，可以考虑设置为 4
+```
+
+**注意：使用 `tiny_yolo_anchors.txt` 就会使用 tiny yolo 模型训练。**
+
+如果你修改的东西不多，`train.py` 也提供了一些指令可以覆写 `settings.py` 的设置：`--classes class_file` 和 `--anchors anchor_file` 。
 
 <br>同时，如果你想使用 YOLOv3 原始预训练权重，可以这样做：
   1. 下载 `darknet53.conv.74` ，可以使用命令 `wget https://pjreddie.com/media/files/darknet53.conv.74`。
   2. 将其重命名为 `darknet53.weights`。
   3. 使用命令 `python convert.py -w darknet53.cfg darknet53.weights model_data/darknet53_weights.h5` 转换为 keras 权重文件。
   4. 在 `train.py` 中使用 `model_data/darknet53_weights.h5`。
+
+完成训练后，运行 `yolo_video.py` 时利用指令 `--model modelfile` 就可以指定你自己训练的模型了。
