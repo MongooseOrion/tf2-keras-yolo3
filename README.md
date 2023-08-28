@@ -72,7 +72,7 @@ x_min,y_min,x_max,y_max,class_id    // class_id 从 0 开始
 ```
 ### 制作自己的数据集
 
-你只需要保证格式与上述的格式一致即可，这可能需要使用自己编写 python 代码，位于存储库 [deep_learn 的名为 process.py 的代码]()或许能给你一些帮助。
+你只需要保证格式与上述的格式一致即可，这可能需要使用自己编写 python 代码，位于存储库 [deep_learn 的名为 process.py 的代码](https://github.com/MongooseOrion/deep_learn/blob/master/python/process.py)或许能给你一些帮助。
 
 ### 处理 COCO 数据集
 
